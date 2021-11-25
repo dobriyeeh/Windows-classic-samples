@@ -39,7 +39,7 @@ void CloudProviderRegistrar::RegisterWithShell()
         // This icon is just for the sample. You should provide your own branded icon here
         info.IconResource(L"%SystemRoot%\\system32\\charmap.exe,0");
         info.HydrationPolicy(winrt::StorageProviderHydrationPolicy::Full);
-        info.HydrationPolicyModifier(winrt::StorageProviderHydrationPolicyModifier::None);
+        info.HydrationPolicyModifier(winrt::StorageProviderHydrationPolicyModifier::StreamingAllowed);
         info.PopulationPolicy(winrt::StorageProviderPopulationPolicy::AlwaysFull);
         info.InSyncPolicy(winrt::StorageProviderInSyncPolicy::FileCreationTime | winrt::StorageProviderInSyncPolicy::DirectoryCreationTime);
         info.Version(L"1.0.0");
@@ -82,6 +82,8 @@ void CloudProviderRegistrar::Unregister()
 {
     try
     {
+        wprintf(L"CloudProviderRegistrar::Unregister\n");
+
         winrt::StorageProviderSyncRootManager::Unregister(GetSyncRootId());
     }
     catch (...)
